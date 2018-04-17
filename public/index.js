@@ -1,4 +1,4 @@
-let playerChoice = 6;
+let playerChoice=-1;
 
 function startGame() {
 	new Promise((resolve, reject) => {
@@ -9,14 +9,14 @@ function startGame() {
 		};
 		xhr.send();
 	}).then(el => {
-		let options = '<p id="hash">' + el.hash + '</p>';
+		let options = '<p>Hash for current game: <span id="hash">' + el.hash + '</span></p>';
 		document.getElementsByClassName('start')[0].style = 'display: none;';
 		document.getElementsByClassName('player-choice')[0].style = 'display: block;';
 		el.rules.forEach((el, id) => {
 			options += '<input type="radio" name="answer" id="' + id + '">' +
 				'<label for="' + id + '">' + el + '</label>';
 		})
-		options += '<input type="submit">';
+		options += '<br><input type="submit">';
 		document.forms[0].innerHTML = options;
 		console.log(el);
 
@@ -30,7 +30,8 @@ document.forms[0].addEventListener('submit', function (e) {
 		let inputs = document.forms[0].elements.answer;
 		inputs.forEach(el => {
 			if (el.checked) playerChoice = el.id;
-		})
+		});
+		if(playerChoice===-1) {alert('Try again!'); reject()}
 		const xhr = new XMLHttpRequest();
 		xhr.open("POST", '/player/' + playerChoice);
 		xhr.setRequestHeader('Content-Type', 'application/json');
@@ -47,6 +48,6 @@ document.forms[0].addEventListener('submit', function (e) {
 		document.getElementById('hash').innerHTML = el.hash;
 		document.getElementById('state').innerHTML = state;
 		document.getElementById('key').innerHTML = el.key;
-		document.getElementById('choice').innerHTML = el.pcChoice+1;
+		document.getElementById('choice').innerHTML = el.pcChoice;
 	});
 });

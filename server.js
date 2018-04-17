@@ -1,4 +1,4 @@
-let rules = ["Rock", "Paper", "Scissors", "Spok", "Lizard", "Java", "Script"];
+let rules;
 
 let pcChoice;
 let key;
@@ -22,6 +22,9 @@ let express = require('express');
 let app = express();
 let bodyParser = require('body-parser');
 let sha1 = require('js-sha1');
+let fs = require('fs');
+
+
 
 app.use(bodyParser.json());
 app.use(express.static('public'));
@@ -35,10 +38,17 @@ app.get('/send', function (req, res) {
 })
 
 app.get('/start', function (req, res) {
-    pcTurn();
-    getKey();
-    hash = sha1(pcChoice + key);
-    res.json({ rules: rules, hash: hash });
+    new Promise(function (res, req) {
+        fs.readFile('./public/rules.txt', function (err, data) {
+            rules = (data.toString()).split(' ');
+            res(rules);
+        });
+    }).then((el) => {
+        pcTurn();
+        getKey();
+        hash = sha1(pcChoice + key);
+        res.json({ rules: rules, hash: hash });
+    });
 })
 
 app.post('/player/:id', function (req, res) {
