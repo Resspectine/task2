@@ -13,10 +13,10 @@ function startGame() {
 		document.getElementsByClassName('start')[0].style = 'display: none;';
 		document.getElementsByClassName('player-choice')[0].style = 'display: block;';
 		el.rules.forEach((el, id) => {
-			options += '<input type="radio" name="answer" id="' + id + '">' +
+			options += '<input  type="radio" name="answer" id="' + id + '">' +
 				'<label for="' + id + '">' + el + '</label>';
 		})
-		options += '<br><input type="submit">';
+		options += '<br><input type="submit" class="btn btn-primary">';
 		document.forms[0].innerHTML = options;
 		console.log(el);
 
@@ -44,10 +44,12 @@ document.forms[0].addEventListener('submit', function (e) {
 		let state;
 		if (el.state === 0) { state = 'Drawn'; }
 		else if (el.state === -1) { state = 'Lose'; }
-		else { state = 'We won zulul'; }
+		else { state = 'We won'; }
 		document.getElementById('hash').innerHTML = el.hash;
 		document.getElementById('state').innerHTML = state;
 		document.getElementById('key').innerHTML = el.key;
 		document.getElementById('choice').innerHTML = el.pcChoice;
 	});
 });
+
+startGame();

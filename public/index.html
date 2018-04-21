@@ -5,23 +5,37 @@
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+	 crossorigin="anonymous">
 </head>
 
 <body>
-	<h1>Rock, Scissors...</h1>
-	<div class="player-choice" style="display: none">
-		<h2>Choose one</h2>
-		<form>
-		</form>
+	<div class="container">
+		<h1>Rock, Scissors...</h1>
+		<div class="player-choice" >
+			<h2>Choose one</h2>
+			<form>
+			</form>
+		</div>
+		<div class="start">
+			<button onclick="startGame()" class="btn btn-primary">Start</button>
+		</div>
+		<p>State:
+			<span id="state"></span>
+		</p>
+		<p>Bot choice:
+			<span id="choice"></span>
+		</p>
+		<p>Secret key:
+			<span id="key"></span>
+		</p>
+		<p>Hash from previous game:
+			<span id="oldHash"></span>
+		</p>
+		<p>You can check it here:
+			<a href="https://www.freeformatter.com/hmac-generator.html#ad-output" target="_blank">https://www.freeformatter.com/hmac-generator.html#ad-output</a>
+		</p>
 	</div>
-	<div class="start">
-		<button onclick="startGame()">Start</button>
-	</div>
-	<p>State: <span id="state"></span></p>
-	<p>Bot choice: <span id="choice"></span></p>
-	<p>Secret key: <span id="key"></span></p>
-	<p>Hash from previous game: <span id="oldHash"></span></p>
-	<p>You can check it here: <a href="http://www.sha1-online.com/" target="_blank">http://www.sha1-online.com/</a></p>
 </body>
 <script src="index.js"></script>
 
